@@ -378,7 +378,7 @@ namespace WordsCS
                         if (ValidWord)
                         {
                             Console.WriteLine();
-                            Console.WriteLine("Valid word");
+                            Console.WriteLine($"Valid word. {Choice} scores {GetScoreForWord(Choice, TileDictionary)} points.");
                             Console.WriteLine();
                             UpdateAfterAllowedWord(Choice, ref PlayerTiles, ref PlayerScore, ref PlayerTilesPlayed, TileDictionary, AllowedWords);
                             NewTileChoice = GetNewTileChoice();
