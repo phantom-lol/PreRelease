@@ -67,9 +67,19 @@ namespace WordsCS
                 int RandNo = 0;
                 if (Rear < MaxSize - 1)
                 {
-                    RandNo = Rnd.Next(0, 26);
-                    Rear++;
-                    Contents[Rear] = Convert.ToChar(65 + RandNo).ToString();
+                    if ((Rear + 2) % 3 == 0)
+                    {
+                        int[] Vowels = { 65, 69, 73, 79, 85 };
+                        int RandVowel = Rnd.Next(0, 4);
+                        Rear++;
+                        Contents[Rear] = Convert.ToChar(Vowels[RandVowel]).ToString();
+                    }
+                    else
+                    {
+                        RandNo = Rnd.Next(0, 26);
+                        Rear++;
+                        Contents[Rear] = Convert.ToChar(65 + RandNo).ToString();
+                    }
                 }
             }
 
