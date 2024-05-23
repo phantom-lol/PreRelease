@@ -337,6 +337,7 @@ namespace WordsCS
             Console.WriteLine();
             Console.WriteLine(PlayerName + " it is your turn.");
             DisplayTilesInHand(PlayerTiles);
+            Console.WriteLine($"You have {PlayerTiles.Length} tiles remaining");
             string NewTileChoice = "2";
             bool ValidChoice = false;
             bool ValidWord = false;
@@ -393,6 +394,7 @@ namespace WordsCS
                     if (NewTileChoice != "4")
                     {
                         AddEndOfTurnTiles(ref TileQueue, ref PlayerTiles, NewTileChoice, Choice);
+                        Console.WriteLine($"You have {PlayerTiles.Length} tiles remaining");
                     }
                     Console.WriteLine();
                     Console.WriteLine("Your word was:" + Choice);
