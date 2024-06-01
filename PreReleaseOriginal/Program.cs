@@ -171,19 +171,49 @@ namespace WordsCS
 
         private static void LoadAllowedWords(ref List<string> AllowedWords)
         {
-            try
+            Console.WriteLine("Would you like to:");
+            Console.WriteLine("1) Use the default dictionary");
+            Console.WriteLine("2) Use a custom dictionary");
+            Console.WriteLine("Please enter your choice:");
+            int choice = int.Parse(Console.ReadLine());
+
+            if (choice == 1)
             {
-                StreamReader FileReader = new StreamReader("aqawords.txt");
-                while (!FileReader.EndOfStream)
+                try
                 {
-                    AllowedWords.Add(FileReader.ReadLine().Trim().ToUpper());
+                    StreamReader FileReader = new StreamReader("aqawords.txt");
+                    while (!FileReader.EndOfStream)
+                    {
+                        AllowedWords.Add(FileReader.ReadLine().Trim().ToUpper());
+                    }
+                    FileReader.Close();
                 }
-                FileReader.Close();
+                catch (Exception)
+                {
+                    AllowedWords.Clear();
+                }
+                Console.WriteLine("Using default dictionary");
             }
-            catch (Exception)
+            else
             {
-                AllowedWords.Clear();
+                Console.WriteLine("Enter the name of the file that you want to use:");
+                string file = Console.ReadLine();
+                try
+                {
+                    StreamReader FileReader = new StreamReader($"{file}.txt");
+                    while (!FileReader.EndOfStream)
+                    {
+                        AllowedWords.Add(FileReader.ReadLine().Trim().ToUpper());
+                    }
+                    FileReader.Close();
+                }
+                catch (Exception)
+                {
+                    AllowedWords.Clear();
+                }
+                Console.WriteLine($"Using {file}.txt as the dictionary");
             }
+
         }
 
         private static bool CheckWordIsInTiles(string Word, string PlayerTiles)
