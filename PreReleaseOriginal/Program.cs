@@ -171,49 +171,19 @@ namespace WordsCS
 
         private static void LoadAllowedWords(ref List<string> AllowedWords)
         {
-            Console.WriteLine("Would you like to:");
-            Console.WriteLine("1) Use the default dictionary");
-            Console.WriteLine("2) Use a custom dictionary");
-            Console.WriteLine("Please enter your choice:");
-            int choice = int.Parse(Console.ReadLine());
-
-            if (choice == 1)
+            try
             {
-                try
+                StreamReader FileReader = new StreamReader("aqawords.txt");
+                while (!FileReader.EndOfStream)
                 {
-                    StreamReader FileReader = new StreamReader("aqawords.txt");
-                    while (!FileReader.EndOfStream)
-                    {
-                        AllowedWords.Add(FileReader.ReadLine().Trim().ToUpper());
-                    }
-                    FileReader.Close();
+                    AllowedWords.Add(FileReader.ReadLine().Trim().ToUpper());
                 }
-                catch (Exception)
-                {
-                    AllowedWords.Clear();
-                }
-                Console.WriteLine("Using default dictionary");
+                FileReader.Close();
             }
-            else
+            catch (Exception)
             {
-                Console.WriteLine("Enter the name of the file that you want to use:");
-                string file = Console.ReadLine();
-                try
-                {
-                    StreamReader FileReader = new StreamReader($"{file}.txt");
-                    while (!FileReader.EndOfStream)
-                    {
-                        AllowedWords.Add(FileReader.ReadLine().Trim().ToUpper());
-                    }
-                    FileReader.Close();
-                }
-                catch (Exception)
-                {
-                    AllowedWords.Clear();
-                }
-                Console.WriteLine($"Using {file}.txt as the dictionary");
+                AllowedWords.Clear();
             }
-
         }
 
         private static bool CheckWordIsInTiles(string Word, string PlayerTiles)
